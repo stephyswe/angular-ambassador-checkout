@@ -57,6 +57,10 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "browserTarget": "angular-ambassador:build",
+            "port": 5000
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -94,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
