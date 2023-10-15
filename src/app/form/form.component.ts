@@ -6,6 +6,9 @@ import { Product } from '../interfaces/product';
 import { User } from '../interfaces/user';
 import { LinkService } from '../services/link.service';
 import { OrderService } from '../services/order.service';
+import { environment } from '../../environments/environment';
+
+declare var Stripe: any
 
 @Component({
   selector: 'app-form',
@@ -18,6 +21,7 @@ export class FormComponent implements OnInit {
   products: Product[] = []
   quantities: number[] = [];
   form!: FormGroup
+  stripe: any
 
   constructor(
     private linkService: LinkService,
@@ -28,6 +32,8 @@ export class FormComponent implements OnInit {
   }
   ngOnInit(): void {
     this.code = this.route.snapshot.params['code'];
+
+    this.stripe = Stripe(environment.stripe_key);
 
     this.form = this.formBuilder.group({
       first_name: '',
@@ -68,7 +74,9 @@ export class FormComponent implements OnInit {
 
     this.orderService.create(data).subscribe(
       res => {
-        console.log(res)
+        this.stripe.redirectToCheckout({
+          sessionId: res.id
+        })
       }
     );
   }

@@ -5,6 +5,7 @@
 export const environment = {
     production: false,
     api: 'http://localhost:8000/api/checkout',
+    stripe_key: "pk_test_51O0duJDQaUagSAHplyGuCjlJ9gziQZGNtOLGIJxUpGRssJCQGaz4wsR3bnvMirSpVZXd4QnyuyBqDZvJBgSyFCkF005mzf5jSt"
 };
 
 /*
