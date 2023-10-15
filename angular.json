@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-checkout",
+            "outputPath": "dist/angular-checkout/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -102,6 +102,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/angular-checkout/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "angular-checkout:build:development",
+              "serverTarget": "angular-checkout:server:development"
+            },
+            "production": {
+              "browserTarget": "angular-checkout:build:production",
+              "serverTarget": "angular-checkout:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-checkout:build:production",
+              "serverTarget": "angular-checkout:server:production"
+            },
+            "development": {
+              "browserTarget": "angular-checkout:build:development",
+              "serverTarget": "angular-checkout:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
