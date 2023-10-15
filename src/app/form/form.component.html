@@ -2,7 +2,9 @@
   <main>
     <div class="py-5 text-center">
       <h2>Welcome</h2>
-      <p class="lead">{{user.first_name}} {{user.last_name}} has invited you to buy this item(s)</p>
+      <ng-container *ngIf="user">
+        <p class="lead">{{user.first_name}} {{user.last_name}} has invited you to buy this item(s)</p>
+      </ng-container>
     </div>
 
     <div class="row g-5">
