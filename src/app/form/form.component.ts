@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { Product } from '../interfaces/product';
+import { User } from '../interfaces/user';
 import { LinkService } from '../services/link.service';
 
 @Component({
@@ -10,7 +12,8 @@ import { LinkService } from '../services/link.service';
 })
 export class FormComponent implements OnInit {
   code!: string
-  user: any
+  user!: User
+  products: Product[] = []
 
   constructor(
     private linkService: LinkService,
@@ -22,8 +25,8 @@ export class FormComponent implements OnInit {
 
     this.linkService.get(this.code).subscribe(
       res => {
-        console.log(res)
         this.user = res.user
+        this.products = res.products;
       }
     )
   }
