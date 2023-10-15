@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   code!: string
   user!: User
   products: Product[] = []
+  quantities: number[] = [];
 
   constructor(
     private linkService: LinkService,
@@ -27,8 +28,14 @@ export class FormComponent implements OnInit {
       res => {
         this.user = res.user
         this.products = res.products;
+        this.products.forEach(p => {
+          this.quantities[p.id] = 0;
+        }); 
       }
     )
   }
 
+  total(): number {
+    return this.products.reduce((s, p) => s + p.price * this.quantities[p.id], 0);    
+  }
 }

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { PageSuccessComponent } from './page-success/page-success.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PageSuccessComponent } from './page-success/page-success.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
